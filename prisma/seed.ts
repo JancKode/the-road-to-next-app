@@ -1,31 +1,29 @@
-import { PrismaClient } from "../src/generated/prisma";
+import { PrismaClient } from "@prisma/client";
 // ... rest of the file stays the same
 
 const prisma = new PrismaClient();
 
 const tickets = [
   {
-    id: "1",
     title: "Ticket 1",
-    content: "This is the first from the database",
+    content: "This is the fourth from the database",
     status: "OPEN" as const,
   },
   {
-    id: "2",
     title: "Ticket 2",
-    content: "This is the second from the database",
+    content: "This is the fifth from the database",
     status: "DONE" as const,
   },
   {
-    id: "3",
     title: "Ticket 3",
-    content: "This is the third from the database",
+    content: "This is the sixth from the database",
     status: "IN_PROGRESS" as const,
   },
 ];
 
 const seed = async () => {
   console.log("Seeding database...");
+  const t0 = performance.now();
 
   // Delete existing tickets
   await prisma.ticket.deleteMany();
@@ -48,6 +46,8 @@ const seed = async () => {
   await prisma.ticket.createMany({
     data: tickets,
   });
+  const t1 = performance.now();
+  console.log(`Time taken: ${t1 - t0} ms`);
 
   console.log("Database seeded successfully!");
 };
