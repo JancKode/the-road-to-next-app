@@ -1,16 +1,15 @@
-import { Link } from "lucide-react";
+import Link from "next/link";
 import Placeholder from "@/components/placeholder";
 import { Button } from "@/components/ui/button";
+import { ticketsPath } from "@/paths";
 
 export default function NotFound() {
   return (
     <Placeholder
-      label="Ticket not found"
+      label="We could not find your ticket"
       button={
-        <Button variant="outline">
-          <Link href="/tickets" className="text-sm underline">
-            Go to Tickets
-          </Link>
+        <Button asChild variant="outline">
+          <Link href={ticketsPath()}>Go to Tickets</Link>
         </Button>
       }
     />
